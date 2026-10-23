@@ -13,7 +13,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: _HomeView()));
+    return Scaffold(
+      body: Center(child: _HomeView()),
+      bottomNavigationBar: CustomBottomNavigation(),
+    );
   }
 }
 
@@ -34,25 +37,17 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    // final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
+    final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
     final slideshowMovies = ref.watch(moviesSlideshowProvider);
+
     return Column(
       children: [
         CustomAppbar(),
         MoviesSlideshow(movies: slideshowMovies),
-        Expanded(
-          child: ListView.builder(
-            itemCount: slideshowMovies.length,
-            itemBuilder: (context, index) {
-              final movie = slideshowMovies[index];
-
-              return ListTile(
-                title: Text(movie.title),
-                subtitle: Text(movie.overview),
-                leading: Image.network(movie.posterPath),
-              );
-            },
-          ),
+        MovieHoryzontalListview(
+          movies: nowPlayingMovies,
+          title: 'En cines',
+          subTitle: 'Lunes 20',
         ),
       ],
     );
