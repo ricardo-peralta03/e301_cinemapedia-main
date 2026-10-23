@@ -1,4 +1,5 @@
 import 'package:e301_cinemapedia/presentation/providers/movies/movies_provider.dart';
+import 'package:e301_cinemapedia/presentation/providers/movies/movies_slideshow_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -33,17 +34,17 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
-
+    // final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
+    final slideshowMovies = ref.watch(moviesSlideshowProvider);
     return Column(
       children: [
         CustomAppbar(),
-        MoviesSlideshow(movies: nowPlayingMovies),
+        MoviesSlideshow(movies: slideshowMovies),
         Expanded(
           child: ListView.builder(
-            itemCount: nowPlayingMovies.length,
+            itemCount: slideshowMovies.length,
             itemBuilder: (context, index) {
-              final movie = nowPlayingMovies[index];
+              final movie = slideshowMovies[index];
 
               return ListTile(
                 title: Text(movie.title),
