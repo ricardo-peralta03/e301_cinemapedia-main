@@ -48,8 +48,8 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
               return ListTile(
                 title: Text(movie.title),
-                //subtitle: Text(movie.overview),
-                //leading: Image.network(movie.posterPath),
+                subtitle: Text(movie.overview),
+                leading: Image.network(movie.posterPath),
               );
             },
           ),
